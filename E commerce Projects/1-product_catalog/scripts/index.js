@@ -1,3 +1,7 @@
+//import algoliasearch from 'https://cdn.jsdelivr.net/npm/algoliasearch@4.23.3/dist/algoliasearch.esm.browser.js';
+
+
+
 /* Generic function for API call*/
 const apiCaller = async url => {
   try {
@@ -12,11 +16,11 @@ const apiCaller = async url => {
   }
 }
 
-
+let allProducts = [];
 const getProducts = async () => {
-  const products = await apiCaller("https://fakestoreapi.com/products");
   
-  console.log(products);
+  allProducts = [...await apiCaller("https://fakestoreapi.com/products")];
 }
-
 getProducts();
+
+console.log(allProducts);

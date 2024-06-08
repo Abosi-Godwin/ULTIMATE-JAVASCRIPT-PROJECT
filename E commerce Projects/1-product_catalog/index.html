@@ -4,13 +4,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--<script src="https://cdn.tailwindcss.com"></script>-->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <title>
-    Ecommerce products catalog 
+    Ecommerce products catalog
   </title>
 </head>
 
 <body>
-<script src="scripts/index.js"></script>
+  <header class="w-screen flex flex-col items-stretch justify-between p-5 gap-y-5 shadow-md text-xl">
+    <div class="flex gap-x-2 w-full items-center justify-start">
+      <h4 class="uppercase">
+        Sort by:
+      </h4>
+      <select name="sorting" id="sorting" class ="outline-none p-3 border-4  rounded-md focus:outline-none">
+        <option value="default" class="focus:outline-none border-none">
+          Default sorting
+        </option>
+        <option value="latest">
+          Latest
+        </option>
+        <option value="price">
+          Price
+        </option>
+        <option value="alphabet">
+          Alphabetically
+        </option>
+      </select>
+    </div>
+    <div>
+        <input class="w-full border-4 p-2 rounded-full focus:outline-none" type="search" placeholder="Search...." id="search">
+    </div>
+
+  </header>
+  <maim>
+    <div class="" id="products-container">
+      
+    </div>
+  </maim>
+  <footer>
+    <!--Tab to edit-->
+  </footer>
+
+  <script src="scripts/index.js" type="module"></script>
 </body>
 
 </html>
