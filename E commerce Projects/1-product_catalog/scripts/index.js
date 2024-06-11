@@ -15,6 +15,12 @@
     }
 */
 
+
+
+/* Store all the products */
+let allProducts = [];
+
+
 /* Generic function for API call*/
 const apiCaller = async url => {
   try {
@@ -29,8 +35,8 @@ const apiCaller = async url => {
   }
 }
 
-let allProducts = [];
 
+/* fetch the product through API*/
 const getProducts = async () => {
   allProducts = [...await apiCaller("https://fakestoreapi.com/products")];
   updateProductsCatalogue(allProducts, "default");
@@ -38,6 +44,7 @@ const getProducts = async () => {
 getProducts();
 
 
+/* creating the products HTML elements*/
 const createProductsElement = productDatas => {
   return `
         <div class="pdt w-full shadow-lg p-3 rounded bg-white">
@@ -62,32 +69,34 @@ const createProductsElement = productDatas => {
         </div>
         
         <div class="cart">
-        <button class="addToCart uppercase text-md rounded font-bold p-2 w-full text-white"> add to cart </dutton>
+        <button class="addToCart uppercase text-md rounded font-bold p-2 w-full text-white"> add to cart </button>
         </div>
-        </div>`;
+        </div>`
 }
 
-
+/* populate the HTML  products section with*/
 const updateProductSection = products => {
-
   const productsSection = document.querySelector("#products-container");
   productsSection.innerHTML = "";
   products.forEach(product => {
     productsSection.insertAdjacentHTML("beforeend", createProductsElement(product));
   })
 }
+
+
+/*function sorting out the products*/
 const sortProducts = (products, sortingType) => {
   const productToSort = [...products];
 
+/* sorting by price*/
   const sortByPrice = productDatas => {
-
     const compareFunction = (a, b) => {
       return a.price - b.price
     }
     return productDatas.sort(compareFunction);
   }
 
-
+/* sorting by the bestselling products*/
   const sortByBestSelling = productDatas => {
     const compareFunction = (a, b) => {
       return b.rating.count - a.rating.count
@@ -95,21 +104,18 @@ const sortProducts = (products, sortingType) => {
     return productDatas.sort(compareFunction);
   }
 
-
-
+/* checking for the sorting method to use*/
   sortingType === "price" ? updateProductSection(sortByPrice(productToSort)) : updateProductSection(sortByBestSelling(productToSort));
-
-  //console.log(sortingType)
 }
 
+/* check to know if products should be sorted*/
 const updateProductsCatalogue = (products, sorting) => {
   sorting === "default" ? updateProductSection(products) : sortProducts(products, sorting);
 }
 
-
+/* Implementing the sorting feature*/
 const productsSortingFunc = () => {
   const sortingInput = document.querySelector("#sorting");
-
   sortingInput.addEventListener("change", e => {
     const selectedSortOption = e.target.value;
     updateProductsCatalogue(allProducts, selectedSortOption);
